@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+    <html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,6 @@
             <a href="/about">About Us</a>
             <a href="/contact">Contact</a>
         </nav>
-        <h1>Home</h1>
+        <h1>About</h1>
     </body>
 </html>
