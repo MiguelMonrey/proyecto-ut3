@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-layout title="Contact Us">
+    <h1>Contact Us</h1>
+    <x-card class="max-w-400">
+        <p>Placeholder for the contact form.</p>
+    </x-card>
+</x-layout>
 
-        <title>Document</title>
-
-    </head>
-    <body>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About Us</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    <h1>Contact</h1>
-    </body>
-</html>
