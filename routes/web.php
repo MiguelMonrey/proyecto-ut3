@@ -3,26 +3,56 @@
 use App\Models\Idea;
 use Illuminate\Support\Facades\Route;
 
+// raíz temporal, para que no salte el error de GitHub
 Route::get('/', function () {
-    $ideas = Idea::query()
-        ->when(request('state'), function ($query, $state) {
-            $query->where('state', $state);
-        })
-        ->get();
-
-    return view('ideas', ['ideas' => $ideas]);
+    return view('welcome');
 });
+
+// index
+Route::get('/ideas', function () {
+    $ideas = Idea::all();
+
+    return view('ideas.index', [
+        'ideas' => $ideas,
+    ]);
+});
+
+// show
+Route::get('/ideas/{idea}', function (Idea $idea) {
+    return view('ideas.show', [
+        'idea' => $idea,
+    ]);
+});
+
+// edit
+Route::get('/ideas/{idea}/edit', function (Idea $idea) {
+    return view('ideas.edit', [
+        'idea' => $idea,
+    ]);
+});
+
+// update
+Route::patch('/ideas/{idea}', function (Idea $idea) {
+    $idea->update([
+        'description' => request('description'),
+    ]);
+
+    return redirect("/ideas/{$idea->id}");
+});
+
+// store
 Route::post('/ideas', function () {
     Idea::create([
-        'description' => request('idea'),
+        'description' => request('description'),
         'state' => 'pending',
     ]);
 
-    return redirect('/');
+    return redirect('/ideas');
 });
-// Temporary
-Route::get('/delete-ideas', function () {
-    Idea::truncate();
 
-    return redirect('/');
+// destroy
+Route::delete('/ideas/{idea}', function (Idea $idea) {
+    $idea->delete();
+
+    return redirect('/ideas');
 });
