@@ -20,7 +20,7 @@
 
                 <ul class="mt-6">
                     @foreach($ideas as $idea)
-                        <li class="text-sm">{{ $idea }}</li>
+                        <li class="text-sm">{{ $idea->description }}</li>
                     @endforeach
                 </ul>
             </div>
