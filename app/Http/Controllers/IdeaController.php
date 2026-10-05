@@ -25,6 +25,9 @@ class IdeaController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        $request->validate([
+            'description' => ['required', 'min:10'],
+        ]);
         Idea::create([
             'description' => request('description'),
             'state' => 'pending',
