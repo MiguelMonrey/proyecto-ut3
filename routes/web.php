@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Idea;
+use App\Http\Controllers\IdeaController;
 use Illuminate\Support\Facades\Route;
 
 // raíz temporal, para que no salte el error de GitHub
@@ -8,51 +8,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// index
-Route::get('/ideas', function () {
-    $ideas = Idea::all();
+Route::get('/ideas', [IdeaController::class, 'index']);
 
-    return view('ideas.index', [
-        'ideas' => $ideas,
-    ]);
-});
+Route::get('/ideas/create', [IdeaController::class, 'create']);
 
-// show
-Route::get('/ideas/{idea}', function (Idea $idea) {
-    return view('ideas.show', [
-        'idea' => $idea,
-    ]);
-});
+Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
 
-// edit
-Route::get('/ideas/{idea}/edit', function (Idea $idea) {
-    return view('ideas.edit', [
-        'idea' => $idea,
-    ]);
-});
+Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit']);
 
-// update
-Route::patch('/ideas/{idea}', function (Idea $idea) {
-    $idea->update([
-        'description' => request('description'),
-    ]);
+Route::patch('/ideas/{idea}', [IdeaController::class, 'update']);
 
-    return redirect("/ideas/{$idea->id}");
-});
+Route::post('/ideas', [IdeaController::class, 'store']);
 
-// store
-Route::post('/ideas', function () {
-    Idea::create([
-        'description' => request('description'),
-        'state' => 'pending',
-    ]);
-
-    return redirect('/ideas');
-});
-
-// destroy
-Route::delete('/ideas/{idea}', function (Idea $idea) {
-    $idea->delete();
-
-    return redirect('/ideas');
-});
+Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
