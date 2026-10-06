@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class IdeaController extends Controller
@@ -23,11 +23,8 @@ class IdeaController extends Controller
         return view('ideas.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(IdeaRequest $request): RedirectResponse
     {
-        $request->validate([
-            'description' => ['required', 'min:10'],
-        ]);
         Idea::create([
             'description' => request('description'),
             'state' => 'pending',
@@ -50,7 +47,7 @@ class IdeaController extends Controller
         ]);
     }
 
-    public function update(Request $request, Idea $idea): RedirectResponse
+    public function update(IdeaRequest $request, Idea $idea): RedirectResponse
     {
         $idea->update([
             'description' => request('description'),
