@@ -23,7 +23,18 @@
         </ul>
     </div>
 
-    <div class="navbar-end">
-        <a class="btn"></a>
+    <div class="navbar-end space-x-2">
+        @guest
+            <a class="btn btn-primary" href="/register">Register</a>
+            <a class="btn btn-secondary" href="/login">Log In</a>
+        @endguest
+
+        @auth
+            <form method="POST" action="/logout">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-ghost">Log Out</button>
+            </form>
+        @endauth
     </div>
 </div>
