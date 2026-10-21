@@ -9,6 +9,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin', function () {
+    Gate::authorize('view-admin');
+
+    return 'Private admin only area';
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/ideas', [IdeaController::class, 'index']);
     Route::get('/ideas/create', [IdeaController::class, 'create']);
